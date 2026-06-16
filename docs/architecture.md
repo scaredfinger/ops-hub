@@ -57,3 +57,13 @@ Cloudflare is only partially available in the current integration, and Contabo i
 - Use Coolify first for server, application, and domain inventory
 - Treat Cloudflare account access as incomplete until token scopes are reviewed
 - Treat Contabo inventory results as unavailable until its MCP schema/tooling issue is fixed
+
+### 00004 Infrastructure - TypeScript Inventory Representation
+
+The repository stores discovered infrastructure as provider-oriented TypeScript under `infrastructure/`.
+Only directly observed resources are represented; inaccessible or unverified resources are intentionally omitted.
+
+- Keep one provider file per reachable provider under `infrastructure/providers/`
+- Keep shared provider and resource types in `infrastructure/types.ts`
+- Re-export providers and a flattened resource list from `infrastructure/index.ts`
+- Regenerate from fresh MCP data by following the mapping and omission rules in DR `00004`
