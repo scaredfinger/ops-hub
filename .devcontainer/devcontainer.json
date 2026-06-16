@@ -1,0 +1,36 @@
+{
+  "name": "Ops Hub",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    "source=${localEnv:HOME}/.local/share/opencode,target=/home/node/.local/share/opencode,type=bind",
+  ],
+  "dockerFile": "Dockerfile",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "initializeCommand": ".devcontainer/initialize.sh",
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postStartCommand": ".devcontainer/post-start.sh",
+  "remoteEnv": {
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1.8": {}
+  },
+  "runArgs": [
+    "--env-file",
+    ".env"
+  ],
+  "updateRemoteUserUID": true,
+  "forwardPorts": [],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "security.workspace.trust.enabled": false
+      }
+    }
+  }
+}
