@@ -46,3 +46,14 @@ Accepted DRs must also be reflected in two derived documentation views:
 - `docs/decisions/index.md` for the decision index
 
 These derived documents improve discoverability while preserving the DRs themselves as the canonical record.
+
+## Operations
+
+### 00003 Infrastructure - MCP Baseline Inventory and Access Gaps
+
+Coolify is the current primary MCP-backed infrastructure inventory source for this repository.
+Cloudflare is only partially available in the current integration, and Contabo is not currently reliable for discovery.
+
+- Use Coolify first for server, application, and domain inventory
+- Treat Cloudflare account access as incomplete until token scopes are reviewed
+- Treat Contabo inventory results as unavailable until its MCP schema/tooling issue is fixed
