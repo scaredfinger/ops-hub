@@ -67,3 +67,12 @@ Only directly observed resources are represented; inaccessible or unverified res
 - Keep shared provider and resource types in `infrastructure/types.ts`
 - Re-export providers and a flattened resource list from `infrastructure/index.ts`
 - Regenerate from fresh MCP data by following the mapping and omission rules in DR `00004`
+
+### 00005 Operations - Devcontainer Runtime and Secret Injection
+
+This repository is expected to run from the configured devcontainer rather than directly on the host.
+Required secrets are made available inside the container as OS environment variables through `.devcontainer/devcontainer.json` using `runArgs` with `--env-file .env`.
+
+- Use the devcontainer as the standard execution environment
+- Treat environment variables inside the running container as the primary secret lookup path
+- Do not assume `remoteEnv` is the secret source in the current setup
