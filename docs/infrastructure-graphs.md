@@ -13,10 +13,12 @@ flowchart TB
   coolify["Coolify\nreachable\n16 observed resources"]
   cloudflare["Cloudflare\npartial\n1 observed resource"]
   contabo["Contabo\nreachable\n3 observed resources"]
+  grafana["Grafana\nreachable\n36 observed resources"]
 
   repo --> coolify
   repo --> cloudflare
   repo --> contabo
+  repo --> grafana
 ```
 
 ## Level 1: Provider Breakdown
@@ -61,6 +63,24 @@ flowchart LR
       d1["calimero.otiuming.com"]
       d2["www.calinq.com"]
       d3["calinq.com"]
+    end
+  end
+
+  subgraph G["Grafana"]
+    subgraph gds["Datasources"]
+      gprom["grafanacloud-eurotechcrew-prom\nprometheus (default)"]
+      glogs["grafanacloud-eurotechcrew-logs\nloki"]
+      gtraces["grafanacloud-eurotechcrew-traces\ntempo"]
+      gsearchds["search-engine\ninfluxdb"]
+      gotherds["12 additional datasources"]
+    end
+
+    subgraph gfolders["Dashboards"]
+      ggcloud["GrafanaCloud folder\n11 dashboards"]
+      ginfra["Infrastructure folder\n3 dashboards"]
+      groot["Root / no folder\n6 dashboards"]
+      gsearchdash["Search Engine - Server"]
+      gweather["Weather"]
     end
   end
 ```
@@ -113,6 +133,18 @@ flowchart TB
     acct["Admin@eurotechcrew.com's Account\nstandard\npartial access"]
   end
 
+  subgraph grafana["Grafana"]
+    gprom2["grafanacloud-eurotechcrew-prom\nprometheus\ndefault"]
+    gsearchds2["search-engine\ninfluxdb"]
+    ggcloud2["GrafanaCloud folder\n11 dashboards"]
+    ginfra2["Infrastructure folder\n3 dashboards"]
+    gsearchdash2["Search Engine - Server"]
+    groot2["Root dashboards\n6"]
+
+    ggcloud2 --> gprom2
+    gsearchdash2 --> gsearchds2
+  end
+
   prod02 -. "same public IPv4" .-> c3
 ```
 
@@ -130,6 +162,8 @@ flowchart LR
   d2["Coolify domain\nwww.calinq.com"]
   d3["Coolify domain\ncalinq.com"]
   cf["Cloudflare account\nAdmin@eurotechcrew.com's Account"]
+  gds["Grafana datasource\nsearch-engine"]
+  gdash["Grafana dashboard\nSearch Engine - Server"]
 
   c3 ---|"same IPv4"| prod02
   prod02 ---|"hosts"| web
@@ -143,6 +177,8 @@ flowchart LR
   prod01 ---|"hosts"| calimeroApp
   prod01 ---|"hosts"| calimeroApi
   prod01 ---|"owns domain"| d1
+
+  gdash ---|"queries"| gds
 ```
 
 ### Strong correlations
@@ -153,6 +189,7 @@ flowchart LR
 - `Coolify tsl-staging-01` hosts `pharma-vendeur-staging`.
 - `calimero.otiuming.com` is tied to `prod-01` and `calimero-owners`.
 - `calinq.com` and `www.calinq.com` are tied to `prod-02` and `www`.
+- `Grafana Search Engine - Server` directly queries the Grafana `search-engine` datasource.
 
 ### Structural correlations
 
@@ -161,6 +198,7 @@ flowchart LR
 - `pharma-vendeur-staging` shares the `pharma-vendeur` naming family with the `Pharma Vendeur` Coolify project.
 - `Cloudflare` is currently only correlated at the account level; no verified zone or workers relationships are present.
 - `Contabo` instances are currently unlinked to the Coolify inventory except for the shared IP match above.
+- Grafana inventory currently includes 16 datasources and 20 dashboards, but only one explicit dashboard-to-datasource relationship has been verified in the committed graph.
 
 ## Notes
 
@@ -168,3 +206,4 @@ flowchart LR
 - Cloudflare is partial: account-level reads worked, but deeper access failed during probing.
 - Contabo is modeled from the direct API script output, not the MCP path.
 - Coolify resources are the primary inventory source in the current repository snapshot.
+- Grafana is modeled from a connected Grafana Cloud account and currently represents datasources plus dashboards only.

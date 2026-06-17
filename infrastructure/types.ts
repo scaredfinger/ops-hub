@@ -1,4 +1,4 @@
-export type ProviderName = 'cloudflare' | 'contabo' | 'coolify';
+export type ProviderName = 'cloudflare' | 'contabo' | 'coolify' | 'grafana';
 
 export type ResourceType =
   | 'account'
@@ -7,7 +7,9 @@ export type ResourceType =
   | 'project'
   | 'application'
   | 'domain'
-  | 'instance';
+  | 'instance'
+  | 'datasource'
+  | 'dashboard';
 
 export type Provider<Resource extends string, Data> = {
   readonly name: ProviderName;
@@ -29,6 +31,8 @@ export type CoolifyResource = 'team' | 'server' | 'project' | 'application' | 'd
 export type CloudflareResource = 'account';
 
 export type ContaboResource = 'instance';
+
+export type GrafanaResource = 'datasource' | 'dashboard';
 
 export type CoolifyTeam = {
   readonly teamId: number;
@@ -75,4 +79,17 @@ export type ContaboInstance = {
   readonly ipv4: string | null;
   readonly ipv6: string | null;
   readonly createdDate: string;
+};
+
+export type GrafanaDatasource = {
+  readonly datasourceType: string;
+  readonly url: string;
+  readonly isDefault: boolean;
+};
+
+export type GrafanaDashboard = {
+  readonly url: string;
+  readonly folderTitle: string | null;
+  readonly tags: ReadonlyArray<string>;
+  readonly dashboardType: string;
 };

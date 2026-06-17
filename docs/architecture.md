@@ -95,3 +95,13 @@ It must be kept in sync with inventory changes so the graph remains accurate.
 - Show only verified or explicitly committed correlations
 - Distinguish hard matches from structural similarities
 - Treat the graph as secondary to `infrastructure/` and the Decision Records
+
+### 00008 Grafana Cloud - MCP Connection and TypeScript Inventory Representation
+
+Grafana Cloud is currently represented as a reachable provider in the repository inventory using a project-local OpenCode MCP connection and devcontainer-supplied credentials.
+Only directly observed datasources and dashboards are committed under `infrastructure/`.
+
+- Use the `grafana` MCP entry in `opencode.json` for the current repository-local connection path
+- Supply `GRAFANA_URL` and `GRAFANA_SERVICE_ACCOUNT_TOKEN` through the devcontainer OS environment
+- Use `infrastructure/providers/grafana.ts` for the current committed Grafana snapshot
+- Treat deeper Grafana objects as unrepresented unless directly observed and intentionally added later
