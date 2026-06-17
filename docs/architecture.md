@@ -85,3 +85,13 @@ The script reads Contabo credentials from the devcontainer OS environment, retur
 - Use `scripts/contabo-inventory.mjs` for current Contabo instance discovery
 - Use `infrastructure/providers/contabo.ts` for the current committed Contabo instance snapshot
 - Treat runtime auth/API failures as operational output; only successful direct reads should be promoted into the repository model
+
+### 00007 Infrastructure - Derived Correlation Graph View
+
+`docs/infrastructure-graphs.md` is a derived human-readable view of the committed infrastructure inventory.
+It must be kept in sync with inventory changes so the graph remains accurate.
+
+- Update the graph in the same change set as inventory changes
+- Show only verified or explicitly committed correlations
+- Distinguish hard matches from structural similarities
+- Treat the graph as secondary to `infrastructure/` and the Decision Records
