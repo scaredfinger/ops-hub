@@ -66,7 +66,7 @@ Only directly observed resources are represented; inaccessible or unverified res
 - Keep one provider file per reachable provider under `infrastructure/providers/`
 - Keep shared provider and resource types in `infrastructure/types.ts`
 - Re-export providers and a flattened resource list from `infrastructure/index.ts`
-- Regenerate from fresh MCP data by following the mapping and omission rules in DR `00004`
+- Regenerate from fresh observed provider data by following the mapping and omission rules in DR `00004`, unless a later DR supersedes them for a specific provider
 
 ### 00005 Operations - Devcontainer Runtime and Secret Injection
 
@@ -76,3 +76,12 @@ Required secrets are made available inside the container as OS environment varia
 - Use the devcontainer as the standard execution environment
 - Treat environment variables inside the running container as the primary secret lookup path
 - Do not assume `remoteEnv` is the secret source in the current setup
+
+### 00006 Contabo - Direct Read-Only Inventory and TypeScript Representation
+
+Contabo discovery currently uses a standalone direct-API script under `scripts/` instead of the broken MCP integration.
+The script reads Contabo credentials from the devcontainer OS environment, returns structured JSON for both successful inventory reads and failures, and the directly observed compute snapshot is represented under `infrastructure/`.
+
+- Use `scripts/contabo-inventory.mjs` for current Contabo instance discovery
+- Use `infrastructure/providers/contabo.ts` for the current committed Contabo instance snapshot
+- Treat runtime auth/API failures as operational output; only successful direct reads should be promoted into the repository model

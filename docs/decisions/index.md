@@ -13,6 +13,7 @@ The files in this directory are the canonical record of significant repository d
 | `00003` | Infrastructure - MCP Baseline Inventory and Access Gaps | `process` | `2026-06-16` | `00001` | `00002` |
 | `00004` | Infrastructure - TypeScript Inventory Representation | `process` | `2026-06-16` | `00001`, `00003` | `00002` |
 | `00005` | Operations - Devcontainer Runtime and Secret Injection | `process` | `2026-06-16` | `00000`, `00001` | `00002` |
+| `00006` | Contabo - Direct Read-Only Inventory and TypeScript Representation | `process` | `2026-06-16` | `00001`, `00003`, `00005` | `00002` |
 
 ## Template
 

@@ -17,17 +17,6 @@
         "COOLIFY_ACCESS_TOKEN": "{env:COOLIFY_ACCESS_TOKEN}",
         "COOLIFY_BASE_URL": "{env:COOLIFY_BASE_URL}"
       }
-    },
-    "contabo": {
-      "type": "local",
-      "command": ["npx", "-y", "@kieksme/contabo-mcp"],
-      "enabled": true,
-      "env": {
-        "CONTABO_CLIENT_ID": "{env:CONTABO_CLIENT_ID}",
-        "CONTABO_CLIENT_SECRET": "{env:CONTABO_CLIENT_SECRET}",
-        "CONTABO_API_USER": "{env:CONTABO_API_USER}",
-        "CONTABO_API_PASSWORD": "{env:CONTABO_API_PASSWORD}"
-      }
     }
   }
 }

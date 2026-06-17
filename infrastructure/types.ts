@@ -1,4 +1,4 @@
-export type ProviderName = 'cloudflare' | 'coolify';
+export type ProviderName = 'cloudflare' | 'contabo' | 'coolify';
 
 export type ResourceType =
   | 'account'
@@ -6,7 +6,8 @@ export type ResourceType =
   | 'server'
   | 'project'
   | 'application'
-  | 'domain';
+  | 'domain'
+  | 'instance';
 
 export type Provider<Resource extends string, Data> = {
   readonly name: ProviderName;
@@ -26,6 +27,8 @@ export type ResourceRecord<Resource extends string, Data> = {
 export type CoolifyResource = 'team' | 'server' | 'project' | 'application' | 'domain';
 
 export type CloudflareResource = 'account';
+
+export type ContaboResource = 'instance';
 
 export type CoolifyTeam = {
   readonly teamId: number;
@@ -59,4 +62,17 @@ export type CoolifyDomain = {
 
 export type CloudflareAccount = {
   readonly accountType: string;
+};
+
+export type ContaboInstance = {
+  readonly displayName: string;
+  readonly region: string;
+  readonly dataCenter: string;
+  readonly status: string;
+  readonly productId: string;
+  readonly productName: string;
+  readonly osType: string;
+  readonly ipv4: string | null;
+  readonly ipv6: string | null;
+  readonly createdDate: string;
 };
